@@ -5,7 +5,7 @@ import {EosService} from '../../services/eos.service';
 import {AccountService} from '../../services/account.service';
 import {VoteService} from '../../services/vote.service';
 import {BpService} from '../../services/bp.service';
-import {} from '@types/googlemaps';
+import {} from 'googlemaps';
 
 @Component({
   selector: 'app-producer',

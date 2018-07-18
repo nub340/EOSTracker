@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EosService} from '../services/eos.service';
 import {ScatterService} from '../services/scatter.service';
-import {timer} from 'rxjs/index';
+import {timer} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
 import {TransactionService} from '../services/transaction.service';
 
