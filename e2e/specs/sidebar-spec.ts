@@ -1,20 +1,21 @@
 import { AppPage } from '../po/app.po';
 import { browser } from 'protractor';
-import { AppNavPage } from '../po/app.nav';
+import { SidebarComponent } from '../po/sidebar.po';
 import { environment } from '../../src/environments/environment';
 
 describe('EOS Explorer > Side Nav', () => {
 
-  let page: AppPage = new AppPage();
-  let nav: AppNavPage = new AppNavPage();
+  let page = new AppPage();
+  let sidebar: SidebarComponent;
 
   beforeAll(() => {
     browser.ignoreSynchronization = true;
+    browser.manage().window().setSize(browser.params.breakpoints.normal.width, browser.params.breakpoints.normal.height);      
     page.navigateTo();
   })
 
   beforeEach(() => {
-    this.nav = new AppNavPage();
+    sidebar = new SidebarComponent();
   });
 
   it('should display nav brand', () => {    
@@ -22,17 +23,17 @@ describe('EOS Explorer > Side Nav', () => {
   });
 
   it('should display search query input', () => {    
-    expect(nav.isSearchQueryInputDisplayed()).toBeTruthy();
+    expect(sidebar.isSearchQueryInputDisplayed()).toBeTruthy();
   });
 
   describe('Dashboard Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isDashboardLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isDashboardLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Dashboard when clicked', () => {
-      nav.clickDashboardLink();
+      sidebar.clickDashboardLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/');
     });
 
@@ -41,11 +42,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Blocks Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isBlocksLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isBlocksLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Blocks when clicked', () => {
-      nav.clickBlocksLink();
+      sidebar.clickBlocksLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/blocks');
     });
 
@@ -54,11 +55,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Transactions Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isTransactionsLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isTransactionsLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Transactions when clicked', () => {
-      nav.clickTransactionsLink();
+      sidebar.clickTransactionsLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/transactions');
     });
 
@@ -67,11 +68,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Accounts Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isAccountsLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isAccountsLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Accounts when clicked', () => {
-      nav.clickAccountsLink();
+      sidebar.clickAccountsLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/accounts');
     });
 
@@ -80,11 +81,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Producers Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isProducersLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isProducersLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Producers when clicked', () => {
-      nav.clickProducersLink();
+      sidebar.clickProducersLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/producers');
     });
 
@@ -93,11 +94,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Actions Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isActionsLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isActionsLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Actions when clicked', () => {
-      nav.clickActionsLink();
+      sidebar.clickActionsLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/actions');
     });
 
@@ -106,11 +107,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Settings Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isSettingsLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isSettingsLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Settings when clicked', () => {
-      nav.clickSettingsLink();
+      sidebar.clickSettingsLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/settings');
     });
 
@@ -119,11 +120,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Support Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isSupportLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isSupportLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Support when clicked', () => {
-      nav.clickSupportLink();
+      sidebar.clickSupportLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/support');
     });
 
@@ -132,11 +133,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Wallet Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isWalletLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isWalletLinkDisplayed()).toBeTruthy();
     });
 
     it('should open EOS Wallet in new window when clicked', () => {
-      nav.clickWalletLink();
+      sidebar.clickWalletLink();
       browser.getAllWindowHandles()
         .then(handles => {          
           return browser.switchTo().window(handles[1])
@@ -153,11 +154,11 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Voting Link', () => {
 
     it('should be displayed', () => {    
-      expect(nav.isVotingLinkDisplayed()).toBeTruthy();
+      expect(sidebar.isVotingLinkDisplayed()).toBeTruthy();
     });
 
     it('should load Voting when clicked', () => {
-      nav.clickVotingLink();
+      sidebar.clickVotingLink();
       browser.getAllWindowHandles()
         .then(handles => {          
           return browser.switchTo().window(handles[1])
@@ -171,4 +172,24 @@ describe('EOS Explorer > Side Nav', () => {
     });
 
   });
+
+  describe('Viewport set to mobile width', () => {
+
+    let isDisplayed: boolean;
+
+    beforeAll(() => {
+      sidebar.isDisplayed().then(displayed => isDisplayed = displayed)
+      browser.manage().window().setSize(browser.params.breakpoints.mobile.width, browser.params.breakpoints.mobile.height); 
+      sidebar = new SidebarComponent();     
+    })
+
+    it('should hide sidebar', () => {
+      browser.wait(() => sidebar.isDisplayed().then(displayed => isDisplayed !== displayed))
+        .then(() => {
+          expect(sidebar.isDisplayed()).toBeFalsy();
+        })      
+    });
+
+  })
+
 });

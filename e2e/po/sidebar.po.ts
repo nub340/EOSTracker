@@ -1,6 +1,6 @@
-import { $, browser, by, element, ElementFinder, ExpectedConditions } from 'protractor';
+import { $, browser, by, ElementFinder, ExpectedConditions } from 'protractor';
 
-export class AppNavPage {
+export class SidebarComponent {
 
   //side-menu
   sideMenu: ElementFinder;
@@ -33,7 +33,7 @@ export class AppNavPage {
     this.votingLink = this.sideMenu.element(by.xpath('.//li//a[normalize-space(.)="Voting"]'));
   }
 
-  isSideMenuDisplayed() {
+  isDisplayed() {
     return this.sideMenu.isDisplayed();
   }
 

@@ -6,7 +6,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/specs/app.nav.ts'
+    './e2e/specs/sidebar-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
@@ -15,8 +15,8 @@ exports.config = {
   baseUrl: 'http://localhost:4200/',
   params: {
     breakpoints: {
-      sm: { width: 1920, height: 1080 },
-      md: { width: 768, height: 1080 }
+      normal: { width: 1920, height: 1080 },
+      mobile: { width: 720, height: 900 }
     }
   },
   framework: 'jasmine',
