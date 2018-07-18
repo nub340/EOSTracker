@@ -13,11 +13,17 @@ exports.config = {
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
+  params: {
+    breakpoints: {
+      sm: { width: 1920, height: 1080 },
+      md: { width: 768, height: 1080 }
+    }
+  },
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function () { }
   },
   onPrepare() {
     require('ts-node').register({

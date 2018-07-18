@@ -1,10 +1,11 @@
-import { $, browser, by, element, ElementFinder } from 'protractor';
+import { $, browser, by, element, ElementFinder, ExpectedConditions } from 'protractor';
 
 export class AppNavPage {
 
   //side-menu
   sideMenu: ElementFinder;
   searchQueryInput: ElementFinder;
+  searchButton: ElementFinder;
   dashboardLink: ElementFinder;
   blocksLink: ElementFinder;
   transactionsLink: ElementFinder;
@@ -14,11 +15,12 @@ export class AppNavPage {
   settingsLink: ElementFinder;
   supportLink: ElementFinder;
   walletLink: ElementFinder;
-  votingLink: ElementFinder;  
-  
+  votingLink: ElementFinder;
+
   constructor() {
     this.sideMenu = $('ul#side-menu');
     this.searchQueryInput = this.sideMenu.$('input[name="query"]');
+    this.searchButton = this.sideMenu.$('input[name="query"]');
     this.dashboardLink = this.sideMenu.element(by.xpath('.//li//a[normalize-space(.)="Dashboard"]'));
     this.blocksLink = this.sideMenu.element(by.xpath('.//li//a[normalize-space(.)="Blocks"]'));
     this.transactionsLink = this.sideMenu.element(by.xpath('.//li//a[normalize-space(.)="Transactions"]'));
@@ -35,8 +37,18 @@ export class AppNavPage {
     return this.sideMenu.isDisplayed();
   }
 
-  isSearchQueryInputDisplayed(){
+  isSearchQueryInputDisplayed() {
     return this.searchQueryInput.isDisplayed();
+  }
+
+  setSearchQueryInput(value: string) {
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.searchQueryInput.sendKeys(value));
+  }
+
+  clickSearchButton() {
+    return this.waitToBeClickable(this.searchButton)
+      .then(() => this.searchButton.click());
   }
 
   isDashboardLinkDisplayed() {
@@ -44,7 +56,8 @@ export class AppNavPage {
   }
 
   clickDashboardLink() {
-    return this.dashboardLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.dashboardLink.click());
   }
 
   isBlocksLinkDisplayed() {
@@ -52,7 +65,8 @@ export class AppNavPage {
   }
 
   clickBlocksLink() {
-    return this.blocksLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.blocksLink.click());
   }
 
   isTransactionsLinkDisplayed() {
@@ -60,7 +74,8 @@ export class AppNavPage {
   }
 
   clickTransactionsLink() {
-    return this.transactionsLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.transactionsLink.click());
   }
 
   isAccountsLinkDisplayed() {
@@ -68,7 +83,8 @@ export class AppNavPage {
   }
 
   clickAccountsLink() {
-    return this.accountsLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.accountsLink.click());
   }
 
   isProducersLinkDisplayed() {
@@ -76,7 +92,8 @@ export class AppNavPage {
   }
 
   clickProducersLink() {
-    return this.producersLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.producersLink.click());
   }
 
   isActionsLinkDisplayed() {
@@ -84,7 +101,8 @@ export class AppNavPage {
   }
 
   clickActionsLink() {
-    return this.actionsLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.actionsLink.click());
   }
 
   isSettingsLinkDisplayed() {
@@ -92,7 +110,8 @@ export class AppNavPage {
   }
 
   clickSettingsLink() {
-    return this.settingsLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.settingsLink.click());
   }
 
   isSupportLinkDisplayed() {
@@ -100,7 +119,8 @@ export class AppNavPage {
   }
 
   clickSupportLink() {
-    return this.supportLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.supportLink.click());
   }
 
   isWalletLinkDisplayed() {
@@ -108,7 +128,8 @@ export class AppNavPage {
   }
 
   clickWalletLink() {
-    return this.walletLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.walletLink.click());
   }
 
   isVotingLinkDisplayed() {
@@ -116,6 +137,12 @@ export class AppNavPage {
   }
 
   clickVotingLink() {
-    return this.votingLink.click();
+    return this.waitToBeClickable(this.searchQueryInput)
+      .then(() => this.votingLink.click());
+  }
+
+  // Private
+  private waitToBeClickable(elem: ElementFinder) {
+    return browser.wait(ExpectedConditions.elementToBeClickable(elem));
   }
 }
