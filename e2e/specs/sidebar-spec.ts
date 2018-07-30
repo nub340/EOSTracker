@@ -117,7 +117,7 @@ describe('EOS Explorer > Side Nav', () => {
 
   });
 
-  describe('Support Link', () => {
+  xdescribe('Support Link', () => {
 
     it('should be displayed', () => {    
       expect(sidebar.isSupportLinkDisplayed()).toBeTruthy();
