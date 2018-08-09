@@ -1,25 +1,29 @@
 import { AppPage } from '../po/app.po';
 import { browser } from 'protractor';
-import { SidebarComponent } from '../po/sidebar.po';
+import { SidenavComponent } from '../po/sidenav.po';
 import { environment } from '../../src/environments/environment';
 
 describe('EOS Explorer > Side Nav', () => {
 
-  let page = new AppPage();
-  let sidebar: SidebarComponent;
+  let appPage = new AppPage();
+  let sidebar: SidenavComponent;
 
   beforeAll(() => {
     browser.ignoreSynchronization = true;
     browser.manage().window().setSize(browser.params.breakpoints.normal.width, browser.params.breakpoints.normal.height);      
-    page.navigateTo();
-  })
+    appPage.navigateTo();
+  });
 
-  beforeEach(() => {
-    sidebar = new SidebarComponent();
+  afterAll(() => {
+    browser.sleep(1000);
+  });
+
+  beforeEach(() => {    
+    sidebar = new SidenavComponent();
   });
 
   it('should display nav brand', () => {    
-    expect(page.getHeadingText()).toEqual('EOS Tracker');
+    expect(appPage.getHeadingText()).toEqual('EOS Tracker');
   });
 
   xit('should display search query input', () => {    
@@ -35,6 +39,32 @@ describe('EOS Explorer > Side Nav', () => {
     it('should load Dashboard when clicked', () => {
       sidebar.clickDashboardLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/');
+    });
+
+  });
+
+  describe('Producers Link', () => {
+
+    it('should be displayed', () => {    
+      expect(sidebar.isProducersLinkDisplayed()).toBeTruthy();
+    });
+
+    it('should load Producers when clicked', () => {
+      sidebar.clickProducersLink();
+      expect(browser.getCurrentUrl()).toBeTruthy('/producers');
+    });
+
+  });
+
+  describe('Accounts Link', () => {
+
+    it('should be displayed', () => {    
+      expect(sidebar.isAccountsLinkDisplayed()).toBeTruthy();
+    });
+
+    it('should load Accounts when clicked', () => {
+      sidebar.clickAccountsLink();
+      expect(browser.getCurrentUrl()).toBeTruthy('/accounts');
     });
 
   });
@@ -61,32 +91,6 @@ describe('EOS Explorer > Side Nav', () => {
     it('should load Transactions when clicked', () => {
       sidebar.clickTransactionsLink();
       expect(browser.getCurrentUrl()).toBeTruthy('/transactions');
-    });
-
-  });
-
-  describe('Accounts Link', () => {
-
-    it('should be displayed', () => {    
-      expect(sidebar.isAccountsLinkDisplayed()).toBeTruthy();
-    });
-
-    it('should load Accounts when clicked', () => {
-      sidebar.clickAccountsLink();
-      expect(browser.getCurrentUrl()).toBeTruthy('/accounts');
-    });
-
-  });
-
-  describe('Producers Link', () => {
-
-    it('should be displayed', () => {    
-      expect(sidebar.isProducersLinkDisplayed()).toBeTruthy();
-    });
-
-    it('should load Producers when clicked', () => {
-      sidebar.clickProducersLink();
-      expect(browser.getCurrentUrl()).toBeTruthy('/producers');
     });
 
   });
@@ -176,20 +180,28 @@ describe('EOS Explorer > Side Nav', () => {
   describe('Viewport set to mobile width', () => {
 
     let isDisplayed: boolean;
+    let appPage: AppPage
 
     beforeAll(() => {
       sidebar.isDisplayed().then(displayed => isDisplayed = displayed)
       browser.manage().window().setSize(browser.params.breakpoints.mobile.width, browser.params.breakpoints.mobile.height); 
-      sidebar = new SidebarComponent();     
+      sidebar = new SidenavComponent();   
+      appPage = new AppPage();       
     })
 
-    it('should hide sidebar', () => {
+    xit('should hide sidebar', () => {
       browser.wait(() => sidebar.isDisplayed().then(displayed => isDisplayed !== displayed))
         .then(() => {
           expect(sidebar.isDisplayed()).toBeFalsy();
         })      
     });
 
-  })
+    xit('should display hamburger menu button in navbar', () => {
+      browser.wait(() => sidebar.isDisplayed().then(displayed => isDisplayed !== displayed))
+        .then(() => {
+          expect(appPage.isHamburgerMenuDisplayed()).toBeTruthy();
+        })            
+    });
 
+  });
 });

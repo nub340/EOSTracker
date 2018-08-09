@@ -1,9 +1,8 @@
 import { $, browser, by, ElementFinder, ExpectedConditions } from 'protractor';
 
-export class SidebarComponent {
+export class SidenavComponent {
 
-  //side-menu
-  sideMenu: ElementFinder;
+  sideNav: ElementFinder;
   searchQueryInput: ElementFinder;
   searchButton: ElementFinder;
   dashboardLink: ElementFinder;
@@ -18,23 +17,23 @@ export class SidebarComponent {
   votingLink: ElementFinder;
 
   constructor() {
-    this.sideMenu = $('app-sidenav');
-    this.searchQueryInput = this.sideMenu.$('input[name="query"]');
-    this.searchButton = this.sideMenu.$('input[name="query"]');
-    this.dashboardLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Dashboard")]'));
-    this.blocksLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Blocks")]'));
-    this.transactionsLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Transactions")]'));
-    this.accountsLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Accounts")]'));
-    this.producersLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Producers")]'));
-    this.actionsLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Actions")]'));
-    this.settingsLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Settings")]'));
-    this.supportLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Support")]'));
-    this.walletLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Wallet")]'));
-    this.votingLink = this.sideMenu.element(by.xpath('.//a[contains(normalize-space(.), "Voting")]'));
+    this.sideNav = $('mat-sidenav');
+    this.searchQueryInput = this.sideNav.$('input[name="query"]');
+    this.searchButton = this.sideNav.$('input[name="query"]');
+    this.dashboardLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Dashboard")]'));
+    this.blocksLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Blocks")]'));
+    this.transactionsLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Transactions")]'));
+    this.accountsLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Accounts")]'));
+    this.producersLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Producers")]'));
+    this.actionsLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Actions")]'));
+    this.settingsLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Settings")]'));
+    this.supportLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Support")]'));
+    this.walletLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Wallet")]'));
+    this.votingLink = this.sideNav.element(by.xpath('.//a[contains(normalize-space(.),"Voting")]'));
   }
 
   isDisplayed() {
-    return this.sideMenu.isDisplayed();
+    return this.sideNav.isDisplayed();
   }
 
   isSearchQueryInputDisplayed() {
@@ -56,7 +55,7 @@ export class SidebarComponent {
   }
 
   clickDashboardLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.dashboardLink)
       .then(() => this.dashboardLink.click());
   }
 
@@ -65,7 +64,7 @@ export class SidebarComponent {
   }
 
   clickBlocksLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.blocksLink)
       .then(() => this.blocksLink.click());
   }
 
@@ -74,7 +73,7 @@ export class SidebarComponent {
   }
 
   clickTransactionsLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.transactionsLink)
       .then(() => this.transactionsLink.click());
   }
 
@@ -83,7 +82,7 @@ export class SidebarComponent {
   }
 
   clickAccountsLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.accountsLink)
       .then(() => this.accountsLink.click());
   }
 
@@ -92,7 +91,7 @@ export class SidebarComponent {
   }
 
   clickProducersLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.producersLink)
       .then(() => this.producersLink.click());
   }
 
@@ -101,7 +100,7 @@ export class SidebarComponent {
   }
 
   clickActionsLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.actionsLink)
       .then(() => this.actionsLink.click());
   }
 
@@ -110,7 +109,7 @@ export class SidebarComponent {
   }
 
   clickSettingsLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.settingsLink)
       .then(() => this.settingsLink.click());
   }
 
@@ -119,7 +118,7 @@ export class SidebarComponent {
   }
 
   clickSupportLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.supportLink)
       .then(() => this.supportLink.click());
   }
 
@@ -128,7 +127,7 @@ export class SidebarComponent {
   }
 
   clickWalletLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.walletLink)
       .then(() => this.walletLink.click());
   }
 
@@ -137,7 +136,7 @@ export class SidebarComponent {
   }
 
   clickVotingLink() {
-    return this.waitToBeClickable(this.searchQueryInput)
+    return this.waitToBeClickable(this.votingLink)
       .then(() => this.votingLink.click());
   }
 
